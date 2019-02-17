@@ -1,0 +1,5 @@
+{
+    "files.autoGuessEncoding": true,
+    "npm.enableScriptExplorer": true,
+    "phpcs.showSources": true
+}

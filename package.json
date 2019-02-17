@@ -6,7 +6,7 @@
   "scripts": {
     "start": "electron ."
   },
-  "repository": "https://github.com/electron/electron-quick-start",
+  "repository": "https://github.com/crazyrex/electron-quick-start",
   "keywords": [
     "Electron",
     "quick",
@@ -17,6 +17,6 @@
   "author": "GitHub",
   "license": "CC0-1.0",
   "devDependencies": {
-    "electron": "^4.0.4"
+    "electron": "^4.0.5"
   }
 }
