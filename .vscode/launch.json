@@ -5,23 +5,108 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "PHP: Lunch server",
+            "type": "php",
+            "request": "launch",
+            "program": "${workspaceRoot}/path/to/server.php",
+            "runtimeExecutable": "php",
+            "runtimeArgs": [
+                "-dzend_extension=path/to/xdebug",
+                "-S",
+                "0.0.0.0:8000"
+            ],
+            "cwd": "${workspaceRoot}",
+            "port": 9000
+        },
+        {
+            "name": "Python: Attach (Remote Debug)",
+            "type": "python",
+            "request": "attach",
+            "port": 5678,
+            "host": "localhost",
+            
+            "pathMappings": [{
+                "localRoot": "",
+                "remoteRoot": "."
+            }]
+        },
+        {
+            "name": "Python: Terminal (external)",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "externalTerminal"
+        },
+        {
             "type": "electron",
             "request": "launch",
-            "name": "Launch Electron",
+            "name": "Electron: Launch",
             "appDir": "${workspaceFolder}/",
             "sourceMaps": true
         },
 
         {
-            "type": "node",
+            "name": "ng: serve",
+            "type": "chrome",
             "request": "launch",
-            "name": "Launch via NPM",
+            "preLaunchTask": "npm: start",
+            "url": "http://localhost:4200/#",
+            "webRoot": "${workspaceFolder}",
             "runtimeExecutable": "npm",
             "runtimeArgs": [
                 "run-script",
                 "debug"
             ],
             "port": 9229
+          },
+          {
+            "name": "ng: test",
+            "type": "chrome",
+            "request": "launch",
+            "url": "http://localhost:9876/debug.html",
+            "webRoot": "${workspaceFolder}",
+            "sourceMaps": true,
+            "sourceMapPathOverrides": {
+              "/./*": "${webRoot}/*",
+              "/src/*": "${webRoot}/*",
+              "/*": "*",
+              "/./~/*": "${webRoot}/node_modules/*"
+            }
+          },
+          {
+            "name": "ng: e2e",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceFolder}/node_modules/protractor/bin/protractor",
+            "protocol": "inspector",
+            "args": ["${workspaceFolder}/e2e/protractor.conf.js"]
+          },
+          {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch in Docker",
+            "preLaunchTask": "tsc-watch",
+            "runtimeExecutable": "npm",
+            "runtimeArgs": ["run", "docker-debug"],
+            "port": 9222,
+            "restart": true,
+            "timeout": 60000,
+            "localRoot": "${workspaceFolder}",
+            "remoteRoot": "/server",
+            "outFiles": [
+                "${workspaceFolder}/dist/**/*.js"
+            ],
+            "skipFiles": [
+                "<node_internals>/**/*.js",
+            ],
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen"    
+          }
+    ],
+    "compounds": [
+        {
+            "name": "Angular/Electron",
+            "configurations": ["ng: serve", "Electron: Launch"]
         }
     ]
 }
