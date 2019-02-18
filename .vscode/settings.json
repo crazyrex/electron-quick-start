@@ -1,5 +1,8 @@
 {
     "files.autoGuessEncoding": true,
     "npm.enableScriptExplorer": true,
-    "phpcs.showSources": true
+    "phpcs.showSources": true,
+    "python.linting.pylintEnabled": true,
+    "python.linting.enabled": true,
+    "rest-client.decodeEscapedUnicodeCharacters": true
 }
